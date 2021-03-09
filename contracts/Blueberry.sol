@@ -3,7 +3,7 @@ pragma solidity >=0.6.2 <0.8.0;
 
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 
-contract myERC20 is ERC20{
+contract Blueberry is ERC20{
     address mainMinter;
     constructor(
         string memory _name, 
@@ -19,8 +19,7 @@ contract myERC20 is ERC20{
     }
 
     function burn(address account, uint amount)external{
-        require(msg.sender == mainMinter);
-        require(account == msg.sender);
+        require(msg.sender == mainMinter && account == msg.sender);
         _burn(account, amount);
     }
 }

@@ -1,12 +1,12 @@
-const myERC20 = artifacts.require("myERC20");
+const BBR = artifacts.require("Blueberry");
 
 const inWei = 10**18;
 
-contract('RFT', async addresses => {
+contract('Blueberry token', async addresses => {
 	const [admin, buyer1, buyer2, _] = addresses;
 
-	it.only('ERC20 is working.', async () => {
-		const con = await myERC20.new("Blueberry", "BBR", admin);
+	it.only('has simple functionality.', async () => {
+		const con = await BBR.new("Blueberry", "BBR", admin);
 		await con.name().then(data=>console.log("Name: ", data));
 		await con.symbol().then(data=>console.log("Symbol: ", data));
 		
