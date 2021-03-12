@@ -7,19 +7,23 @@ contract Blueberry is ERC20{
     address mainMinter;
     constructor(
         string memory _name, 
-        string memory _symbol,
+        string memory _symbol, 
         address _mainMinter
     ) ERC20(_name, _symbol){
         mainMinter = _mainMinter;
     }
 
-    function mint(address account, uint amount) external{
-        require(msg.sender == mainMinter);
+    modifier onlyOwner{
+      require(msg.sender == mainMinter);
+      _;
+    }
+
+    function mint(address account, uint amount)onlyOwner external{
         _mint(account, amount);
     }
 
-    function burn(address account, uint amount)external{
-        require(msg.sender == mainMinter && account == msg.sender);
+    function burn(address account, uint amount)onlyOwner external{
+        require(account == mainMinter);
         _burn(account, amount);
     }
 }
